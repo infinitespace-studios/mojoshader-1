@@ -9462,6 +9462,7 @@ static void verify_swizzles(Context *ctx)
     } // for
 } // verify_swizzles
 
+DLLEXPORT
 const MOJOSHADER_parseData *MOJOSHADER_parseExpression(const unsigned char *tokenbuf,
                                       const unsigned int bufsize,
                                       MOJOSHADER_malloc m,
@@ -9490,6 +9491,7 @@ const MOJOSHADER_parseData *MOJOSHADER_parseExpression(const unsigned char *toke
 //  attempts to read from a temporary register that has not been written by a
 //  previous instruction."  (true for ps_1_*, maybe others). Check this.
 
+DLLEXPORT
 const MOJOSHADER_parseData *MOJOSHADER_parse(const char *profile,
                                              const unsigned char *tokenbuf,
                                              const unsigned int bufsize,

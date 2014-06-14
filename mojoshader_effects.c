@@ -12,6 +12,7 @@
 
 #include <math.h>
 
+DLLEXPORT
 void MOJOSHADER_runPreshader(const MOJOSHADER_preshader *preshader,
                              const float *inregs, float *outregs)
 {

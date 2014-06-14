@@ -14,6 +14,14 @@
 #include <stdarg.h>
 #include <assert.h>
 
+#ifndef DLLEXPORT
+#if _MSC_VER && _DLL
+#define DLLEXPORT __declspec(dllexport)
+#else
+#define DLLEXPORT
+#endif
+#endif
+
 #include "mojoshader.h"
 
 #define DEBUG_LEXER 0

@@ -681,12 +681,14 @@ typedef struct MOJOSHADER_parseData
  */
 int MOJOSHADER_maxShaderModel(const char *profile);
 
+DLLEXPORT
 const MOJOSHADER_parseData *MOJOSHADER_parseExpression(const unsigned char *tokenbuf,
                                       const unsigned int bufsize,
                                       MOJOSHADER_malloc m,
 									  MOJOSHADER_free f, void *d);
 
 
+DLLEXPORT
 void MOJOSHADER_runPreshader(const MOJOSHADER_preshader*, const float*, float*);
 
 /*
@@ -737,6 +739,8 @@ void MOJOSHADER_runPreshader(const MOJOSHADER_preshader*, const float*, float*);
  *  (tokenbuf) remains intact for the duration of the call. This allows you
  *  to parse several shaders on separate CPU cores at the same time.
  */
+
+DLLEXPORT
 const MOJOSHADER_parseData *MOJOSHADER_parse(const char *profile,
                                              const unsigned char *tokenbuf,
                                              const unsigned int bufsize,

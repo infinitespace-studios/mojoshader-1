@@ -2232,7 +2232,7 @@ static void emit_GLSL_end(Context *ctx)
         //TODO: fix if we've already seen a ret
         output_line(ctx, "gl_Position.y = gl_Position.y * posFixup.y;");
         output_line(ctx, "gl_Position.xy += posFixup.zw * gl_Position.ww;");
-        //output_line(ctx, "gl_Position.z = gl_Position.z * 2.0 - gl_Position.w;");
+        output_line(ctx, "gl_Position.z = gl_Position.z * 2.0 - gl_Position.w;");
     }
 
     // force a RET opcode if we're at the end of the stream without one.

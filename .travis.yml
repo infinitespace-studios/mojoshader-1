@@ -18,7 +18,7 @@ script:
 - cd build
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake -DCMAKE_OSX_ARCHITECTURES="i386;x86_64" .. ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cmake .. ; fi
-- make
+- make mojoshader
 - cd ..
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./buildwindll ; fi
 - ls build/

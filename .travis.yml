@@ -1,0 +1,33 @@
+language: csharp
+notifications:
+  email: false
+os:
+- osx
+- linux
+compiler:
+- clang
+- gcc
+before_script:
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-key adv --keyserver keyserver.ubuntu.com
+  --recv-keys D43A795B73B16ABE9643FE1AFD8FFF16DB45C6AB ; echo "deb http://pkg.mxe.cc/repos/apt/debian
+  wheezy main" | sudo tee -a /etc/apt/sources.list.d/mxeapt.list ; sudo apt-get -yy
+  update ; sudo apt-get --assume-yes install mxe-i686-w64-mingw32.static-gcc mxe-x86-64-w64-mingw32.static-gcc ; fi
+script:
+- mkdir build
+- mkdir buildwin
+- cd build
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake -DCMAKE_OSX_ARCHITECTURES="i386;x86_64" .. ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cmake .. ; fi
+- make
+- cd ..
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./buildwindll ; fi
+- ls build/
+deploy:
+  provider: releases
+  api_key:
+    secure: MAz5aH2ztf9r0ggNG2ey4s4KqhtZ4ppl9+69G1cE0A1FEVHvm/XCreJ9NNR9JbiEhPu38xs7nXmAAiM90DYRX09qi3EqfvHBH2YiAvyl1zfz9Owy9aQ69gIGC1LqvuZZGypRbpe6JUSGu8IK7n1tvtOKAusI0s5/Vpwge3xyfbb6XOYN6hrPTbAxMZmaHGbvhYuVEc5N85VUMwTokd/l26NTGeMa/+PP3kPEaDkC+4RAt8aUMIr8VyGFSbWz7o9XzB3FqTh5z8ENII6RHPfL8b/v964js2EXxZNg45oKgBMDFeLZjXv5iK0qmYgPVz9Qg0i2D4bTE/v9v3+11NRA0L6eSJN1aRkPdJcJnoZZ4A+hifmpVTGaLQQm88p8ULg3nh9mFyRudRp5HrUAWYDoE+yS/FmevMawhLOfSmpptAwrg2BcfAbLlaSPtGVB08aODHUbLFQjweq7bUpV4XmZ7xoy/rUin0hlXeUCvggutzt58mlPYV3iNHGd2s/OtAvzY8ko4O1WU9rB0oZfeODDP/CciWg09t8Z5WrEFfoCxGRbaUN1nb1U3x3rA+KxRl4KlNRq2LnIkO5VaiZJKazRW2qxWRbhZDFYB98VXghgvPsnIP+Oj0kWcsfKP2kYMtAi5YkQvgFak9Z47Za6B9aNdGGv/szJmgdFBRU1c/Oi2F8=
+  skip_cleanup: true
+  file_glob: true
+  file: build/libmojoshader*
+  on:
+    repo: infinitespace-studios/MojoShader
